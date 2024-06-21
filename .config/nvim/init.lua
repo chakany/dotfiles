@@ -1,40 +1,26 @@
 vim.opt.termguicolors = true
+vim.g.mapleader = ";"
+vim.g.maplocalleader = ";"
 
--- Notifications
-vim.notify = require("notify")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- Intents
+require("lazy").setup("plugins")
+
+-- Indents
 vim.o.expandtab = true
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-
--- Highlighting
-require'nvim-treesitter.configs'.setup {
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "javascript", "typescript", "go", "html", "css", "json", "jsdoc", "make", "markdown", "markdown_inline", "svelte", "yaml" },
-	auto_install = true,
-	highlight = {
-		enable = true,
-	}
-}
-
--- Autocompletion
-vim.g.coq_settings = {
-    auto_start = "shut-up",
-}
-local coq = require "coq"
-
--- LSP
-local lsp = require "lspconfig"
-lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities())
-
--- File Explorer
-require("oil").setup({
-  default_file_explorer = true,
-  delete_to_trash = true,
-  view_options = {
-      show_hidden = true,
-  }
-})
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
 
 -- Line Numbers
 vim.opt.number = true
@@ -45,7 +31,7 @@ vim.opt.signcolumn = "number"
 vim.opt.showmode = false -- removes mode from command bar
 local gl = require "galaxyline"
 local colors = require("galaxyline.themes.colors").default
-gl.short_line_list = { "oil" }
+gl.short_line_list = { "oil", "chadtree" }
 local condition = require "galaxyline.condition"
 
 gl.section.left[1] = {
