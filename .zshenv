@@ -24,8 +24,7 @@ elif [[ $platform == "Darwin" ]]; then
   PATH=$PATH:$(/usr/libexec/path_helper -s)
 fi
 
-if command_exists nvm; then
-  export NVM_DIR=~/.nvm
-  source $NVM_DIR/nvm.sh
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
