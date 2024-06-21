@@ -1,14 +1,4 @@
 return {
-    {
-        "stevearc/oil.nvim",
-        opts = {
-            default_file_explorer = true,
-            delete_to_trash = true,
-            view_options = {
-                show_hidden = true,
-            },
-        },
-    },
   {
       "rcarriga/nvim-notify",
       init = function()
@@ -28,5 +18,4 @@ return {
   },
   "NTBBloodbath/galaxyline.nvim",
   "nvim-tree/nvim-web-devicons",
-  "ms-jpq/chadtree"
 }

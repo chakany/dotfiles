@@ -2,6 +2,10 @@ vim.opt.termguicolors = true
 vim.g.mapleader = ";"
 vim.g.maplocalleader = ";"
 
+-- splits
+vim.keymap.set("n", "<leader>v", "<cmd>vsplit<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>h", "<cmd>split<CR>", { noremap = true, silent = true })
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
