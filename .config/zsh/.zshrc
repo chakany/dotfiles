@@ -1,9 +1,34 @@
 # Colors
 autoload -U colors && colors
-PROMPT="jack@enigma "
+setopt PROMPT_SUBST # refresh prompt
+check_writable() {
+  if [ -r $PWD ] && [ -w $PWD ]; then
+    # do literally nothing
+  else
+    echo "󰉐 "
+  fi
+}
+
+make_prompt() {
+  local new_prompt="%{$fg[red]%}%{$reset_color%}%B%{$fg[white]%}%{$bg[red]%}$(check_writable)${PWD/#$HOME/~}%b%{$reset_color%}%{$fg[red]%}"
+  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    local branch=$(git symbolic-ref --short HEAD 2>/dev/null || git rev-parse --short HEAD)
+    local git_status=$(git status --porcelain)
+    new_prompt=$new_prompt"%K{202} %B%{$fg[white]%}"
+    if [[ -n $git_status ]]; then
+      new_prompt=$new_prompt" $branch"
+    else
+      new_prompt=$new_prompt" $branch"
+    fi
+    new_prompt=$new_prompt"%b%{$reset_color%}%F{202}"
+  fi
+  new_prompt=$new_prompt"%{$reset_color%}"
+  echo $new_prompt
+}
+PROMPT='$(make_prompt) '
 
 # Aliases
-alias config='git --git-dir=$HOME/.cfg-git/ --work-tree=$HOME'
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Shell Histories
 HISTFILE=~/.cache/zsh/history
