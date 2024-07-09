@@ -1,5 +1,11 @@
 return {
   {
+    "lukas-reineke/indent-blankline.nvim",
+    lazy = false,
+    main = "ibl",
+    opts = {},
+  },
+  {
       "rcarriga/nvim-notify",
       init = function()
           vim.notify = require("notify")
