@@ -1,3 +1,5 @@
+source ~/.zshsecrets
+
 # Colors
 autoload -U colors && colors
 setopt PROMPT_SUBST # refresh prompt
@@ -29,6 +31,8 @@ PROMPT='$(make_prompt) '
 
 # Aliases
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+source $HOME/.nix-profile/etc/profile.d/nix.sh
 
 # Shell Histories
 HISTFILE=~/.cache/zsh/history
