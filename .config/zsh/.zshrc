@@ -34,6 +34,10 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 source $HOME/.nix-profile/etc/profile.d/nix.sh
 
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 # Shell Histories
 HISTFILE=~/.cache/zsh/history
 HISTSIZE=1000
@@ -50,3 +54,15 @@ zstyle ":completion:*" menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
+
+# bun completions
+[ -s "/Users/jack/.bun/_bun" ] && source "/Users/jack/.bun/_bun"
+
+[ -f "/Users/jack/.ghcup/env" ] && . "/Users/jack/.ghcup/env" # ghcup-env
+# pnpm
+export PNPM_HOME="/Users/jack/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

@@ -1,4 +1,3 @@
-vim.opt.termguicolors = true
 vim.g.mapleader = ";"
 vim.g.maplocalleader = ";"
 
@@ -20,6 +19,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
+
+-- use terminal colors
+vim.cmd('highlight Normal guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE')
+
+vim.opt.termguicolors = true
 
 -- Indents
 vim.o.expandtab = true
